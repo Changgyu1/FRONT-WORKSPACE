@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  background-image: linear-gradient(to left,#B06AB3,#4568DC);
+  background-color: #6b5597b0;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+nav {
+  float: left;
+  width: 30%;
+  height: 300px;
+  background-color: #f5a8ef;
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px;
+}
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+footer {
+  background-image: linear-gradient(45deg,violet,orange)/*시작할 색상 정하기*/;
+  background-color: #cfff33;
+  padding: 10px;
+  text-align: center;
+  color: darkblue;
+}
+
+@media (max-width:600px) {
+
+  nav,
+  article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+button {
+  background-color: darkgray;
+  color: white;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px darkgray;
+  /*그림자 추가*/
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.article-container input{
+  
+  padding: 5px;
+  margin-bottom: 10px;
+}
