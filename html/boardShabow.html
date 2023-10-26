@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="./css/styles.css">
-  </head>
-  <body>
-    <div class="container">
-      <h1>점심 게시판</h1>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="./css/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>점심 게시판</h1>
 
     <ul class="post-list"><!--게시물 목록 작성하는 곳-->
       <li class="post">
@@ -13,7 +15,7 @@
         <p>메뉴 더보기 클릭 -> <a href="https://www.instagram.com/lunch_mz/?hl=ko"> 클릭합시다.</a></p>
       </li>
       <li class="post">
-        <h2>명동 칼국수  역삼점</h2>
+        <h2>명동 칼국수 역삼점</h2>
         <p>명동칼국수 9000원</p>
       </li>
     </ul>
@@ -21,20 +23,54 @@
     <div class="form-container">
       <!--메뉴 추가하는 추가란-->
       <h2>새 게시물 작성하기</h2>
-        <form class="post-form">
-          <input type="text" placeholder="제목"><br>
-          <br><textarea  placeholder="내용 작성하기"></textarea>
-          <button type="submit">작성 완료</button>
-        </form>
-      
+      <form class="post-form">
+        <input type="text" placeholder="제목"><br>
+        <br><textarea placeholder="내용 작성하기"></textarea>
+        <button type="submit" id="post-button">작성 완료</button>
+
+        <button onclick="hihibutton()">안녕 ~~ 버튼이야</button>
+        <button onclick="joinbutton()">회원가입 하기</button>
+        <p id="joinCheck">회원가입을 하는 중입니다.</p>
+      </form>
+      <script>
+        function hihibutton() {
+          alert("안녕 나는 버튼이라고해~");
+        };
+      </script>
+      <script>
+        function joinbutton() {
+          var txt;
+          if (confirm("버튼클릭!")) {
+            text = "클릭완료";
+          } else {
+            txt = "회원가입 실패";
+          }
+          document.getElementById("joinCheck").innerHTML = txt;
+        };
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          //1. HTML 버튼 ID 가져오기
+          const postButton = document.getElementById("post-button")
+
+          //버튼을 클릭할 때 실행될 함수를 정의
+          function buttonClick() {
+            alert("게시물의 내용을 작성해주세요.")
+          }
+          //버튼 클릭 시 실행될 함수 연결
+          postButton.addEventListener("click", buttonClick);
+        });
+
+      </script>
     </div>
 
- 
+
 
     <h2>새 게시글 작성</h2>
-    
-    
+
+
   </div>
 
-  </body>
+</body>
+
 </html>
