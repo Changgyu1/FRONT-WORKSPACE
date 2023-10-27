@@ -1,0 +1,23 @@
+body{
+  font: 17px 'Nanum Gothic', sans-serif;
+}
+a{
+  text-decoration: none;
+  color: #404040;
+}
+li{
+  list-style: none;;
+}
+#menu1{
+  width: 500px;
+  height: 50px;
+  outline: 2px dotted red;
+}
+#menu1 ul li{
+  float: left; /*왼쪽부터 가로 정렬*/
+  width: 25%; /*li항목이 모두 4개이므로 4등분을 위한 사이즈 정의*/
+  height: 100%; /*float 해제를 위한 세로 사이즈 지정*/
+  line-height: 50px; /*텍스트 중앙 정렬(위/아래)*/
+  text-align: center; /*텍스트 가운데 정렬*/
+  background: #98e0ad; /*백그라운드 색상 지정*/
+}

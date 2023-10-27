@@ -20,10 +20,8 @@ header {
 }
 .incomments{
   border: 1px solid darkgray;
-  width: 50%;
-  height: 50%;
+
   
-  margin-left: 35%;
 }
 nav {
   float: left;
@@ -55,7 +53,7 @@ section::after {
 footer {
   background-image: linear-gradient(45deg,violet,orange)/*시작할 색상 정하기*/;
   background-color: #cfff33;
-  padding: 10px;
+margin: 0 auto;
   text-align: center;
   color: darkblue;
 }
@@ -107,22 +105,18 @@ button {
     </nav>
 
     <article>
-      <p>dqwdwqd</p>
-      <div id = "comments" class="incomments"></div>
-      <br>
-      <input placeholder="댓글 작성하기" id="commentInput" class="left">
-      <button onclick="addComment()">작성완료</button>
-    
+
+      <div id = "posts" class="incomments">
+      </div>
+      <form id="postForm">
+      <label for="title">제목 :</label>
+      <input type="text" id="title" name="title" required>
+      <label for="content">내용 :</label> <br>
+      <textarea id="content" name="content" required></textarea>
+      <br> 
+      <button type="submit" id="ButtonA" disabled>게시하기</button>
+    </form>
     </article>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const postButton = document.getElementById("post-button")
-        function buttonClick() {
-          alert("작성이 완료되었습니다.")
-        }
-        postButton.addEventListener("click", buttonClick);
-      });
-    </script>
   </section>
   <footer>
     <p>회사소개 | 연혁 | 오시는길</p>
@@ -130,23 +124,89 @@ button {
 </body>
 <foot></foot>
   <script>
-    function addComment(){
-      const commentInput = document.getElementById("commentInput");
-      const commentText = commentInput.value;
-      if(commentText.trim()=== ""){
-        alert("댓글을 작성해주세요");
-        return;
-      }
-      const commentsBox = document.getElementById("comments");
+     const postForm = document.getElementById("postForm");
+      const posts = document.getElementById("posts");
+      const postArray = []; // 게시물을 저장하는 배열
+      postForm.addEventListener("submit", function(event){
+          event.preventDefault();
+          const title = postForm.title.value;
+          const content = postForm.content.value;
+          const date = new Date();
+          const post = {
+              title,
+              content,
+              date,
+              comments:[],
+          };
+      postArray.push(post); // 게시물을 배열에 추가합니다
+      // 새 게시물을 담아줄 div 생성
+      const postDiv = document.createElement("div");
+      postDiv.classList.add("post");
+      postDiv.innerHTML = `
+      <h3>${title}</h3>
+      <p>${content}</p>
+      <p>게시일 : ${date.toLocaleString()}</p>
+      `;
 
-      const commentDIV = document.createElement("div");
-      commentDIV.className="comment";
-      commentDIV.textContent = commentText;
-
-      commentsBox.appendChild(commentDIV);
-      commentInput.value="";
+      // 삭제 버튼 생성
+      const deleteButton = document.createElement("button"); //변수할당
+      deleteButton.classList.add("delete-button"); //버튼의 이름 적용
+      deleteButton.innerHTML = "게시글 삭제하기"; // 텍스트 지정
+      deleteButton.addEventListener("click",() => { // deleteButton에대한 이벤트 생성
+        postArray.splice(postArray.indexOf(post),1); //
+        posts.removeChild(postDiv);
+      });
       
+      //댓글 폼 생성
+      const commentForm = document.createElement("form");
+      commentForm.innerHTML = `
+        <input type="text" name="comment" placeholder="댓글추가하기">
+        <button type="submit">게시</button>
+      `;
+
+      commentForm.addEventListener("submit", function(event){
+        event.preventDefault();
+        const commentText = commentForm.comment.value;
+        const comment = {
+            text : commentText,
+            date : new Date(),
+        };
+        post.comments.push(comment);
+        const commentDiv = document.createElement("div");
+        commentDiv.classList.add("comment");
+        commentDiv.innerHTML = `
+        <p>${commentText}</p>
+        <p>작성일 : ${date.toLocaleString()}</p>
+        `;
+        //댓글 입력 초기화
+        commentForm.comment.value = "";
+        postDiv.appendChild(commentDiv);
+      });
+      
+      postDiv.appendChild(deleteButton);
+      postDiv.appendChild(commentForm);
+      //게시물 목록 추가
+      posts.appendChild(postDiv);
+      
+      postForm.title.value = "";
+      postForm.content.value = "";
+  });
+  const titleInput = document.getElementById('title');
+  const contentInput = document.getElementById('content');
+
+  const Button = document.getElementById('ButtonA');
+
+  function checkInputs(){
+    if(titleInput.value.trim() !== '' && contentInput.value.trim() !== ''){
+      Button.removeAttribute('disabled');
+    }else{
+      Button.setAttribute('disable', true);
     }
+  }
+
+  titleInput.addEventListener('input', checkInputs);
+  contentInput.addEventListener('input', checkInputs);
+    
   </script>
 
 </html>
