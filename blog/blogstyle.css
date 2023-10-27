@@ -1,0 +1,57 @@
+@keyframes example {
+  from {background-color: yellow;}
+  to {background-color: darkblue;}
+  to {background-color: green;}
+  to {background-color: red;}
+
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+h1{
+  text-align: center;
+}
+textarea{
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto; 
+  display: block;
+  padding: 10px;
+}
+button{
+  display:block;
+  margin: 10px auto;
+  background-color: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+button:hover{ /*hover : 마우스 올려놨을때*/
+animation-name: example;
+animation-duration: 3s;
+animation-direction : reverse;
+}
+ul{
+  list-style-type: none;
+  padding: 0%;
+}
+div{
+  width: 100%;
+  height: 1000px;
+  border-image-slice:
+  12 12 12 12;
+  border-image-width:
+  12px 12px 12px 12px;
+  border-image-outset:
+  0px 0px 0px 0px;
+  border-image-repeat:
+  repeat repeat;
+  border-image-source:
+  url("https://mdn.github.io/css-examples/tools/border-image-generator/border-image-5.png");
+  border-style:
+  solid;
+}
