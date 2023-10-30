@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>뮤직 카운트</title>
+    <style>
+        audio{
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            border: 2px solid #f08080;
+            border-radius: 8px;
+            background-color: red;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        audio::-webkit-media-controls-panel{
+            background-color: #f08080;
+            border-radius: 8px;
+        }
+        audio::-webkit-media-controls-play-button{
+            background-color: #fff;
+            border: 2px solid #f8080f;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>노래재생</h1>
+    <!-- autoplay : 자동재생 -->
+    <audio id="myAudio" controls autoplay>
+        <source src="mp3" type="audio/mpeg"> 
+    </audio>
+
+    <script>
+        // 자동 재생을 위한 JS 코드
+        const audio = document.getElementById('myAudio');
+        audio.play();
+    </script> 
+
+</body>
+</html>
