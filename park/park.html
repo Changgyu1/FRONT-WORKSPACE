@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .mainName {
+            font-size: 40px;
+            padding: 15px;
+            margin: 1 auto;
+            text-align: center;
+            border: 2px solid darkkhaki;
+            border-radius: 20px;
+            background-color: rgba(184, 176, 69, 0.589);
+            height: 100px;
+        }
+
+        .column {
+            float: left;
+            width: 25%;
+            /* 4등분 */
+            padding: 10px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .row {
+            border: 2px solid darkkhaki;
+            border-radius: 20px;
+            background-color: rgba(184, 176, 69, 0.589);
+        }
+
+        button {
+            background-color: #f3f3f3;
+            border: 2px solid #f3f3f3;
+            border-radius: 30px;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+
+        .imgg {
+            /*이미지 가운데 정렬*/
+            /*P.S.: justify-content 속성을 center 로 지정하면 이미지를
+             수평으로만 중앙 정렬하게 됩니다. 이미지를 수직으로도 
+            중앙 정렬하기 위해서는 align-items 속성 또한 center 로 지정해야 합니다.*/
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .aa {
+            float: left;
+            border: 1px solid darkgray;
+            padding: 0 20px 0 0;
+            margin: 10px;
+        }
+
+        .bb {
+            display: block;
+            text-align: left;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 class="mainName">BLOG 게시판</h1>
+    </div>
+    <div class="row"> <!-- 버튼 부분 -->
+        <div class="column">
+            <button>로그인</button>
+        </div>
+
+        <div class="column">
+            <button id="add-post" class="button">게시글 작성</button>
+        </div>
+
+        <div class="column">
+            <button>버튼입니다</button>
+        </div>
+
+        <div class="column">
+            <button>버튼입니다</button>
+        </div>
+    </div>
+    <div class="aa">
+        <div class="bb">
+            <ul>
+                <li>qwd</li>
+                <li>qdw</li>
+            </ul>
+        </div>
+
+    </div>
+    <div>
+        <ul id="blogPostList"></ul>
+        <div id="pagination">
+            <h3 id="currentPage">페이지 1</h3>
+            <button id="prevPage">이전</button>
+            <button id="nextPage">다음</button>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        //팝업창
+        document.getElementById('add-post').addEventListener('click', () => {
+            const popupWindow = window.open('', '', 'width=400, height=400');
+            const popupDocument = popupWindow.document;
+
+            // 게시글 작성 양식 추가
+            popupDocument.write('<h2>게시글 작성</h2>');
+            popupDocument.write('<input type="text" id="blogtitle" placeholder="제목"><br>');
+            popupDocument.write('<textarea id="blogPost" placeholder="내용"></textarea><br>');
+            popupDocument.write('<button id="saveButton"> 저장 </button>');
+        });
+        // 저장 버튼을 클릭하면 새로운 게시물을 저장하고 목록 갱신
+        popupDocument.getElementById('saveButton').addEventListener('click', () => {
+            const title = popupDocument.getElementById('blogtitle').value;
+            const blogPostContent = document.getElementById("blogPost").value;
+
+
+            // 게시물 제목과 내용이 비어있지 않은지 검사
+            // 제목과 내용중 하나라도 입력해야지 if 블록 내 코드가 실행
+            // 입력 필드가 비어있을 때 게시물을 저장하지않도록 하기 위해 작성
+            if (title && content) {
+                const timestamp = new Date().getTime();
+                const blogPost = {
+                    id: timestamp,
+                    content: blogPostContent,
+                };
+
+                const savedPosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+                savedPosts.push(blogPost);
+                localStorage.setItem("blogPosts", JSON.stringify(savedPosts));
+
+                alert("게시글이 저장되었습니다.");
+
+            } else {
+                alert("게시글 내용을 입력하세요.");
+            }
+
+        });
+
+
+        //HTML요소 가져오기
+        const blogPostList = document.getElementById("blogPostList");
+        let savePosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+
+        const itemsPerPage = 5; // 페이지당 표시할 게시물 수
+        let currentPage = 1; //현재 페이지
+
+        savePosts = savePosts.reverse(); // 역순 정렬
+
+        //페이지에 따라 게시물 표시
+        function displayPosts(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const postsToDisplay = savePosts.slice(startIndex, endIndex);
+
+            blogPostList.innerHTML = '';
+
+            postsToDisplay.array.forEach(post => {
+                const listItem = document.createElement("li");
+                listItem.textContent = post.content;
+                blogPostList.appendChild(listItem);
+            });
+            document.getElementById("currentPage").textContent = `페이지 ${page}`;
+        }
+
+        //이전 버튼 클릭 이벤트
+        document.getElementById("prevPage").addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+                displayPosts(currentPage); //이전 페이지로 이동하고 게시물을 표시
+            }
+        });
+
+        //다음 버튼 클릭 이벤트를 처리
+        document.getElementById("nextPage").addEventListener("click", function () {
+            if (currentPage < Math.ceil(savePosts.length / itemsPerPage)) {
+                currentPage++;
+                displayPosts(currentPage); //다음  페이지로 이동하고 게시물 표시
+            }
+        });
+
+        //초기 페이지 로드시 게시물 표시
+        displayPosts(currentPage);
+        document.getElementById()
+    </script>
+</body>
+
+</html>
