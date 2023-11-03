@@ -1,3 +1,97 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.mainName {
+    font-size: 40px;
+    padding: 15px;
+    margin: 1 auto;
+    text-align: center;
+    border: 2px solid darkkhaki;
+    border-radius: 20px;
+    background-color: rgba(184, 176, 69, 0.589);
+    height: 100px;
+}
+
+.column {
+    float: left;
+    width: 25%;
+    /* 4등분 */
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row {
+    border: 2px solid darkkhaki;
+    border-radius: 20px;
+    background-color: rgba(184, 176, 69, 0.589);
+}
+
+button {
+    background-color: #f3f3f3;
+    border: 2px solid #f3f3f3;
+    border-radius: 30px;
+}
+
+img {
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 450px;
+    max-height: 450px;
+}
+
+.imgg {
+    /*이미지 가운데 정렬*/
+    /*P.S.: justify-content 속성을 center 로 지정하면 이미지를
+     수평으로만 중앙 정렬하게 됩니다. 이미지를 수직으로도 
+    중앙 정렬하기 위해서는 align-items 속성 또한 center 로 지정해야 합니다.*/
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aa {
+    float: left;
+    border: 1px solid darkkhaki;
+    background-color: rgba(184, 176, 69, 0.589);
+    border-radius: 15px;
+    padding: 0 20px 0 0;
+    margin: 10px;
+    width: 20%;
+    height: 500px;
+}
+
+#post-list {
+    float: left;
+    margin: 10px;
+    width: 75%;
+    height: 500px;
+    border: 1px solid darkblue;
+    box-sizing: border-box;
+}
+
+.imagggg {
+    border: 1px solid darkcyan;
+    float: left;
+    margin: 10px;
+    width: 40%;
+}
+
 .img-container {
     /*이미지 가로로 나열하기*/
     display: flex;
@@ -6,9 +100,29 @@
     /*가로방향으로 중앙 정렬  이미지들이 수평 가운데 정렬*/
 
 }
-.image {
-    max-width: 500px;
-    max-height:500px;
-    margin: 10px;
-    padding: 10px;
+audio{
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    border: 2px solid #f08080;
+    border-radius: 8px;
+    background-color: red;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+audio::-webkit-media-controls-panel{
+    background-color: #f08080;
+    border-radius: 8px;
+}
+audio::-webkit-media-controls-play-button{
+    background-color: #fff;
+    border: 2px solid #f8080f;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+.audiotitle{
+    text-align: center;
+}
+#item{
+    margin: 0 auto;
 }

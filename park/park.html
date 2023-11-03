@@ -4,100 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        .mainName {
-            font-size: 40px;
-            padding: 15px;
-            margin: 1 auto;
-            text-align: center;
-            border: 2px solid darkkhaki;
-            border-radius: 20px;
-            background-color: rgba(184, 176, 69, 0.589);
-            height: 100px;
-        }
-
-        .column {
-            float: left;
-            width: 25%;
-            /* 4등분 */
-            padding: 10px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .row::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        .row {
-            border: 2px solid darkkhaki;
-            border-radius: 20px;
-            background-color: rgba(184, 176, 69, 0.589);
-        }
-
-        button {
-            background-color: #f3f3f3;
-            border: 2px solid #f3f3f3;
-            border-radius: 30px;
-        }
-
-        img {
-            border-radius: 50%;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 450px;
-            max-height: 450px;
-        }
-
-        .imgg {
-            /*이미지 가운데 정렬*/
-            /*P.S.: justify-content 속성을 center 로 지정하면 이미지를
-             수평으로만 중앙 정렬하게 됩니다. 이미지를 수직으로도 
-            중앙 정렬하기 위해서는 align-items 속성 또한 center 로 지정해야 합니다.*/
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .aa {
-            float: left;
-            border: 1px solid darkgray;
-            padding: 0 20px 0 0;
-            margin: 10px;
-            width: 22%;
-            height: 50%;
-        }
-
-        #post-list {
-            float: left;
-            margin: 10px;
-            width: 30%;
-            height: 500px;
-            border: 1px solid darkblue;
-            box-sizing: border-box;
-        }
-        .imagggg{
-            border: 1px solid darkcyan;
-            float: left;
-            margin: 10px;
-            width: 40%;
-        }
-    </style>
-
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -124,27 +31,43 @@
     <div>
 
         <ul class="aa">
-            <li>qwd</li>
-            <li>qdw</li>
+            <h3 class="audiotitle">음악 재생</h3>
+            <audio id="myAudio" controls autoplay>
+                <source src="음악파일" type="audio/mpeg">
+            </audio>
+            <div><br>
+                신나는 음악재생</div>
+            <br>
+            <div>
+                <label for="item">상품명 : </label>
+                <input type="text" id="item" placeholder="물건 이름"> <br>
+                <label for="price">가 &nbsp;&nbsp;격 : </label>
+                <input type="number" id="price" placeholder="가격" value="0"> <br>
+                <label for="count"> 갯&nbsp;&nbsp; 수 : </label>
+                <input type="number" id="count" placeholder="갯수" value="0">
+                <button onclick="addItem()">추가</button>
+                <div>
+                    <br>
+                    <ul id="itemList">
+                        <!-- 추가한 물건 목록 나열 -->
+                    </ul>
+                </div>
+                <br>
+                <p>총 가격 : <span id="totalPrice">0</span>원</p>
+            </div>
         </ul>
 
         <ul id="post-list"></ul>
-        <div id="pagination">
-            <div class="imagggg">
-            
-            
-            <div class="img-container">
-                <!-- 이미지를 추가하는 공간-->
-            </div>
-            <button id="prevPage">이전</button>
-            <button id="nextPage">다음</button>
-        </div>
-        </div>
 
     </div>
 
+    <script>
+        // 자동 재생을 위한 JS 코드
+        const audio = document.getElementById('myAudio');
+        audio.play();
+    </script>
 
-
+    <script src="./js/cul.js"></script>
     <script src="./js/image.js"></script>
 
 
